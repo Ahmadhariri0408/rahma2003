@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f9eeee">
+<title>إلى رحومتي 🤍</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&display=swap');
+
+:root {
+  --pink: #e8c9cc;
+  --rose: #bd9298;
+  --dark: #76595d;
+  --cream: #fffaf7;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Cairo', sans-serif;
+  color: var(--dark);
+  background:
+    radial-gradient(circle at 15% 15%, #fff 0, transparent 30%),
+    linear-gradient(145deg, #fffaf7, #f7e8e9, #f5eeee);
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.background-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  color: #fff;
+  animation: sparkle 3s infinite alternate;
+  text-shadow: 0 0 12px #d8aeb2;
+}
+
+@keyframes sparkle {
+  from { opacity: .2; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+.floating-heart {
+  position: fixed;
+  bottom: -30px;
+  color: white;
+  opacity: .7;
+  pointer-events: none;
+  animation: floatUp 9s linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0) rotate(0); opacity: 0; }
+  15% { opacity: .7; }
+  to { transform: translateY(-110vh) rotate(35deg); opacity: 0; }
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 16px;
+}
+
+.screen {
+  width: 100%;
+  max-width: 620px;
+  min-height: 590px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: enter .65s ease both;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  color: #b38b90;
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+h1, h2 {
+  font-family: 'Amiri', serif;
+  font-weight: 400;
+  color: #966f76;
+}
+
+h1 {
+  font-size: clamp(38px, 8vw, 55px);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: clamp(32px, 7vw, 43px);
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 2.3;
+  color: #796366;
+}
+
+.subtitle {
+  color: #a18486;
+  font-size: 14px;
+}
+
+.white-heart {
+  font-size: 48px;
+  margin: 20px 0;
+  filter: drop-shadow(0 5px 10px #d7b5b8);
+}
+
+.envelope {
+  position: relative;
+  width: 235px;
+  height: 155px;
+  margin: 35px auto 25px;
+  background: #d9afb5;
+  border-radius: 9px;
+  box-shadow: 0 18px 40px #9c73752b;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.envelope:hover {
+  transform: translateY(-7px);
+}
+
+.envelope:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f0d5d7;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  z-index: 2;
+}
+
+.envelope:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #c9959e;
+  clip-path: polygon(0 100%, 50% 47%, 100% 100%);
+  z-index: 3;
+}
+
+.envelope-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 38px;
+  z-index: 4;
+}
+
+.open-hint {
+  color: #a17e82;
+  font-size: 13px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .5; }
+}
+
+.paper {
+  width: 100%;
+  background: #ffffffb8;
+  border: 1px solid #ead8d8;
+  border-radius: 28px;
+  padding: 38px 27px;
+  box-shadow: 0 15px 45px #97717412;
+  backdrop-filter: blur(10px);
+}
+
+.flower {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.nav-button {
+  border: 1px solid #e5c9cc;
+  background: #fffaf7;
+  color: #966f76;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 13px;
+  transition: .25s;
+}
+
+.nav-button.primary {
+  background: #c99da3;
+  color: white;
+  border-color: #c99da3;
+  box-shadow: 0 7px 20px #c99da344;
+}
+
+.nav-button:hover {
+  transform: translateY(-3px);
+}
+
+.progress {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: #ead7d8;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #b98b92;
+  transition: width .5s;
+}
+
+.music-button {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 5;
+  border: 1px solid #e5c9cc;
+  border-radius: 30px;
+  padding: 10px 15px;
+  color: #966f76;
+  background: #fffaf7e8;
+  font-size: 12px;
+}
+
+.choice-button {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #e6cdd0;
+  border-radius: 20px;
+  color: #8e6c71;
+  background: #fffaf7;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.choice-button:hover,
+.choice-button.selected {
+  background: #f0dfe1;
+  border-color: #c99da3;
+}
+
+.answer {
+  display: none;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 18px;
+  background: #fbf0ef;
+  line-height: 2;
+  font-size: 14px;
+}
+
+.answer.show {
+  display: block;
+  animation: enter .5s ease both;
+}
+
+.final-heart {
+  font-size: 75px;
+  animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.13); }
+}
+
+footer {
+  margin-top: 25px;
+  font-size: 11px;
+  color: #b29899;
+}
+
+@media(max-width: 480px) {
+  .screen { min-height: 570px; }
+  .paper { padding: 30px 20px; }
+  p { font-size: 14px; }
+  .navigation { gap: 8px; }
+  .nav-button { padding: 11px 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-stars" id="stars"></div>
+
+<div class="progress" id="progress" style="display:none">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<main id="app">
+
+  <!-- الشاشة الأولى: الظرف -->
+  <section class="screen active" id="screen0">
+    <div class="eyebrow">A LITTLE WORLD FOR YOU</div>
+    <h1>إلى رحومتي</h1>
+    <p class="subtitle">في حكاية صغيرة مستنياكي...</p>
+
+    <div class="envelope" id="envelope">
+      <div class="envelope-heart">🤍</div>
+    </div>
+
+    <div class="open-hint">اضغطي على الظرف وافتحي المفاجأة</div>
+    <footer>صُنعت بابتسامة صغيرة 🤍</footer>
+  </section>
+
+  <!-- الشاشة الثانية -->
+  <section class="screen" id="screen1">
+    <div class="paper">
+      <div class="flower">🌷</div>
+      <div class="eyebrow">A LITTLE LETTER</div>
+      <h2>رسالة صغيرة ليكي</h2>
+      <p>
+        مش كل الكلام لازم يكون له مناسبة،
+        وأحيانًا بنحب نسيب ذكرى لطيفة
+        من غير سبب معين.
+        <br><br>
+        فحبيت أعملك حاجة مختلفة،
+        فيها شوية تفاصيل حلوة،
+        وشوية كلام من القلب،
+        وتكون ابتسامة صغيرة وسط يومك.
+      </p>
+      <div class="white-heart">🤍</div>
+    </div>
+    <div class="navigation">
+      <button class="nav-button" onclick="goTo(0)">رجوع</button>
+      <button class="nav-button primary" onclick="goTo(2)">كمّلي الحكاية ←</button>
+    </div>
+  </section>
+
+  <!-- الشاشة الثالثة -->
+  <section class="screen" id="screen2">
+    <div class="paper">
+      <div class="flower">✨</div>
+      <div class="eyebrow">SOMETHING TO SAY</div>
+      <h2>حاجة حابب أقولهالك</h2>
+      <p>
+        يمكن ساعات الواحد ما بيعرفش يعبّر
+        عن كل اللي جواه بالطريقة الصح،
+        وممكن كلمة تطلع في غير وقتها،
+        أو تصرف يتفهم بشكل مختلف.
+        <br><br>
+        بس لو في يوم حصل مني حاجة ضايقتك،
+        فحقك عليّا.
+        مش قصدي أبدًا تكوني زعلانة بسببي،
+        وأتمنى دايمًا تفضل بينا
+        الضحكة والكلام الحلو.
+      </p>
+      <div class="white-heart">🤍</div>
+    </div>
+    <div class="navigation">
+      <button class="nav-button" onclick="goTo(1)">رجوع</button>
+      <button class="nav-button primary" onclick="goTo(3)">اللي بعده ←</button>
+    </div>
+  </section>
+
+  <!-- الشاشة الرابعة -->
+  <section class="screen" id="screen3">
+    <div class="paper">
+      <div class="flower">🌙</div>
+      <div class="eyebrow">A PRAYER FOR YOU</div>
+      <h2>دعوة من القلب</h2>
+      <p>
+        يا رب في كل يوم،
+        ارزقها راحة بال ما تنتهيش،
+        وفرحة تدخل قلبها من غير ميعاد،
+        وابعد عنها كل حزن وتعب.
+        <br><br>
+        يا رب حقق لها اللي بتتمناه،
+        ويسّر لها كل صعب،
+        واجعل أيامها مليانة ستر ورضا وطمأنينة،
+        واحفظها من كل شر.
+      </p>
+      <div class="white-heart">🤍</div>
+    </div>
+    <div class="navigation">
+      <button class="nav-button" onclick="goTo(2)">رجوع</button>
+      <button class="nav-button primary" onclick="goTo(4)">دعوة تانية؟ ←</button>
+    </div>
+  </section>
+
+  <!-- الشاشة الخامسة -->
+  <section class="screen" id="screen4">
+    <div class="paper">
+      <div class="flower">🦋</div>
+      <div class="eyebrow">A LITTLE QUESTION</div>
+      <h2>سؤال صغير ليكي</h2>
+      <p>لو تقدري تختاري حاجة واحدة تخلي يومك أحلى، هتختاري إيه؟</p>
+
+      <button class="choice-button" onclick="choose(this, 'يوم هادي من غير أي ضغوط 🤍')">
+        يوم هادي من غير أي ضغوط
+      </button>
+
+      <button class="choice-button" onclick="choose(this, 'خروجة حلوة وضحك كتير 🌷')">
+        خروجة حلوة وضحك كتير
+      </button>
+
+      <button class="choice-button" onclick="choose(this, 'مفاجأة من غير مناسبة 🎁')">
+        مفاجأة من غير مناسبة
+      </button>
+
+      <div class="answer" id="answer"></div>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-button" onclick="goTo(3)">رجوع</button>
+      <button class="nav-button primary" onclick="goTo(5)">آخر مفاجأة ←</button>
+    </div>
+  </section>
+
+  <!-- الشاشة السادسة -->
+  <section class="screen" id="screen5">
+    <div class="paper">
+      <div class="eyebrow">JUST FOR YOU</div>
+      <div class="final-heart">🤍</div>
+      <h2>وصلنا للنهاية</h2>
+      <p>
+        أتمنى تكوني ابتسمتي ولو ابتسامة صغيرة،
+        وإن يومك يكون أخف وأجمل.
+        <br><br>
+        خدي بالك من نفسك،
+        وافتكري دايمًا إنك تستاهلي
+        أيام حلوة تشبه قلبك.
+        <br><br>
+        وربنا يكتبلك الخير في كل خطوة.
+      </p>
+      <div class="white-heart">🤍</div>
+      <p class="subtitle">انتهت المفاجأة... بس الحكايات الحلوة بتفضل.</p>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-button" onclick="goTo(4)">رجوع</button>
+      <button class="nav-button primary" onclick="goTo(0)">من البداية 🤍</button>
+    </div>
+  </section>
+
+</main>
+
+<button class="music-button" id="musicBtn">♫ الموسيقى تعمل</button>
+
+<script>
+// النجوم
+const stars = document.getElementById('stars');
+
+for (let i = 0; i < 35; i++) {
+  const star = document.createElement('span');
+  star.className = 'star';
+  star.textContent = Math.random() > .5 ? '✦' : '✧';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.fontSize = (8 + Math.random() * 12) + 'px';
+  star.style.animationDelay = Math.random() * 4 + 's';
+  stars.appendChild(star);
+}
+
+// قلوب بيضاء متحركة
+function addHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'floating-heart';
+  heart.textContent = '🤍';
+  heart.style.left = Math.random() * 100 + '%';
+  heart.style.fontSize = (12 + Math.random() * 17) + 'px';
+  heart.style.animationDuration = (7 + Math.random() * 5) + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 12000);
+}
+
+setInterval(addHeart, 1800);
+
+// التنقل بين الشاشات
+let currentScreen = 0;
+
+function goTo(number) {
+  document.getElementById('screen' + currentScreen).classList.remove('active');
+
+  currentScreen = number;
+
+  const nextScreen = document.getElementById('screen' + currentScreen);
+  nextScreen.classList.remove('active');
+
+  // إعادة تشغيل حركة الدخول
+  void nextScreen.offsetWidth;
+  nextScreen.classList.add('active');
+
+  const progress = document.getElementById('progress');
+  const fill = document.getElementById('progressFill');
+
+  progress.style.display = number === 0 ? 'none' : 'block';
+  fill.style.width = (number / 5 * 100) + '%';
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// السؤال التفاعلي والرد المختلف لكل اختيار
+function choose(button, message) {
+  document.querySelectorAll('.choice-button').forEach(item => {
+    item.classList.remove('selected');
+  });
+
+  button.classList.add('selected');
+
+  const answer = document.getElementById('answer');
+
+  const replies = {
+    'يوم هادي من غير أي ضغوط 🤍':
+      'يبقى النهارده ممنوع التفكير الكتير، ومسموح بالراحة والدلع وبس. ربنا يريح بالك يا رحومة 🤍',
+
+    'خروجة حلوة وضحك كتير 🌷':
+      'يبقى محتاجة خروجة فيها ضحك من القلب وحكايات كتير وذكريات حلوة 🌷',
+
+    'مفاجأة من غير مناسبة 🎁':
+      'أهو دي بقى مفاجأة من غير مناسبة 😂🤍 مش لازم يكون فيه سبب عشان نعمل حاجة حلوة.'
+  };
+
+  answer.textContent = replies[message] || 'اختيار جميل 🤍';
+  answer.classList.add('show');
+}
+
+// الموسيقى: لحن أصلي هادئ يتولد داخل المتصفح
+let audioContext = null;
+let masterGain = null;
+let musicPlaying = false;
+let melodyTimer = null;
+let noteIndex = 0;
+
+const melody = [
+  [523.25, 850],
+  [659.25, 850],
+  [783.99, 1200],
+  [659.25, 850],
+  [587.33, 850],
+  [523.25, 1400],
+  [440.00, 850],
+  [523.25, 850],
+  [659.25, 1200],
+  [587.33, 850],
+  [523.25, 850],
+  [493.88, 1400],
+  [523.25, 850],
+  [659.25, 850],
+  [783.99, 1400],
+  [698.46, 850],
+  [659.25, 850],
+  [587.33, 1400]
+];
+
+const musicBtn = document.getElementById('musicBtn');
+
+function playNote(frequency, duration) {
+  if (!audioContext || !masterGain) return;
+
+  const now = audioContext.currentTime;
+
+  // النغمة الرئيسية
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = 'sine';
+  oscillator.frequency.value = frequency;
+
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.linearRampToValueAtTime(0.075, now + 0.08);
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001, now + duration / 1000
+  );
+
+  oscillator.connect(gain);
+  gain.connect(masterGain);
+
+  oscillator.start(now);
+  oscillator.stop(now + duration / 1000 + 0.05);
+
+  // نغمة خلفية منخفضة
+  const bass = audioContext.createOscillator();
+  const bassGain = audioContext.createGain();
+
+  bass.type = 'sine';
+  bass.frequency.value = frequency / 2;
+
+  bassGain.gain.setValueAtTime(0.0001, now);
+  bassGain.gain.linearRampToValueAtTime(0.018, now + 0.1);
+  bassGain.gain.exponentialRampToValueAtTime(
+    0.0001, now + duration / 1000
+  );
+
+  bass.connect(bassGain);
+  bassGain.connect(masterGain);
+
+  bass.start(now);
+  bass.stop(now + duration / 1000 + 0.05);
+}
+
+function playMelody() {
+  if (!musicPlaying) return;
+
+  const [frequency, duration] = melody[noteIndex];
+
+  playNote(frequency, duration);
+
+  noteIndex = (noteIndex + 1) % melody.length;
+
+  melodyTimer = setTimeout(playMelody, duration);
+}
+
+async function startMusic() {
+  try {
+    if (!audioContext) {
+      const AudioContextClass =
+        window.AudioContext || window.webkitAudioContext;
+
+      audioContext = new AudioContextClass();
+
+      masterGain = audioContext.createGain();
+      masterGain.gain.value = 0.55;
+      masterGain.connect(audioContext.destination);
+    }
+
+    await audioContext.resume();
+
+    if (musicPlaying) return;
+
+    musicPlaying = true;
+    musicBtn.textContent = '♫ إيقاف الموسيقى';
+
+    playMelody();
+
+  } catch (error) {
+    musicBtn.textContent = '♫ اضغطي لتشغيل الموسيقى';
+  }
+}
+
+function stopMusic() {
+  musicPlaying = false;
+  clearTimeout(melodyTimer);
+  musicBtn.textContent = '♫ تشغيل الموسيقى';
+}
+
+// فتح الظرف يبدأ الموسيقى
+document.getElementById('envelope').addEventListener('click', async () => {
+  await startMusic();
+  goTo(1);
+});
+
+// زر إيقاف وتشغيل الموسيقى
+musicBtn.addEventListener('click', async () => {
+  if (musicPlaying) {
+    stopMusic();
+  } else {
+    await startMusic();
+  }
+});
+</script>
+
+</body>
+</html>
